@@ -27,7 +27,7 @@ int main() {
             
             for(int w = 1; w <= n; w++){
                 for(int h = 1; h <= m; h++){
-                    if(i+w <= n && j+h <= n && chk(i, j, w, h)) {
+                    if(i+w <= n && j+h <= m && chk(i, j, w, h)) {
                         flag = true;
                         ans = max(ans, w*h);
                     }
