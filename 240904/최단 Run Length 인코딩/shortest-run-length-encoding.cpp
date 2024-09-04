@@ -3,30 +3,31 @@
 #include <algorithm>
 using namespace std;
 string str;
-map<char, int> mp;
 int ans = 987654321;
 int main() {
     cin >> str;
-    for(int i = 0; i < str.size(); i++){
-        string temp ="";
-        //while(i--){ //i: 특정 횟수
+    int N = str.size();
+    for(int cnt = 0; cnt < N; cnt++){
+        int temp;
+
+        for(int i = 0; i < cnt; i++){
+
             char tmp = str[str.size()-1];
             for(int i = str.size()-1; i >= 1; i--){
                 str[i]= str[i-1];
             }
             str[0]= tmp;
-        //}
-        // aaaaabbbbc
-        for(int i = 0; i < str.size(); i++){
-            mp[str[i]]++;
         }
-        for(auto it = mp.begin(); it != mp.end(); it++){
-            temp += (it->first);
-            temp += to_string(it->second);
+        temp = 2; int count =1;
+        for(int i = 1; i < str.size(); i++){
+                if(str[i]==str[i-1]) count++;
+                else {
+                    count = 1; temp+=2;
+                }
+                if(count == 10) temp+=1;
+            }
+            ans = min(ans, temp);
         }
-        int t= temp.size(); //cout << temp;
-        ans = min(ans, t);
-    }
     cout << ans;
     return 0;
 }
