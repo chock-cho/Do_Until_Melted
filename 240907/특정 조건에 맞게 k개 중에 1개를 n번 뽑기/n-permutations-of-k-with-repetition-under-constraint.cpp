@@ -4,10 +4,10 @@ using namespace std;
 int K, N;
 vector<int> v;
 bool chk(){
-    for(int i = 1; i < v.size(); i++){
-        if(v[i]!=v[i-1]) return true;
+    for(int i = 1; i < v.size()-1; i++){
+        if(v[i]==v[i-1]&&v[i]==v[i+1]) return false;
     }
-    return false;
+    return true;
 }
 
 void print(){
@@ -22,7 +22,7 @@ void dfs(int cur){
         if(chk()) {
             print(); return;
         }
-        else if(N ==1) {
+        else if(N<3) {
            print(); return;
         } 
         return;
