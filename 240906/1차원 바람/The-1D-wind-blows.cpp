@@ -5,7 +5,7 @@ int grid[104][104];
 string priorDir;
 void leftPush(int r){
     priorDir = "L";
-    int tmp = grid[r][M]; //cout << tmp << "\n";
+    int tmp = grid[r][M]; 
     for(int col = M; col >= 2; col--){
         grid[r][col]= grid[r][col-1];
     }
@@ -30,7 +30,6 @@ bool blowChk(int K, int r){
 
 void upBlow(int r){
     if(r <= 1) return;
-    //cout << r << "열, 위로 바람 전파\n";
     if(!blowChk(r-1, r)) return;
     if(r >= 2 && blowChk(r-1, r)){
         (priorDir == "L")? rightPush(r-1) : leftPush(r-1);
@@ -42,11 +41,9 @@ void upBlow(int r){
 
 void downBlow(int r, string originDir, int cnt){  
     if(r >= N) return;
-     //cout << r << "열, 아래로 바람 전파\n";
-    if(cnt==0) priorDir = originDir; 
+   if(cnt==0) priorDir = originDir; 
     if(!blowChk(r+1, r)) return;
     if(r <= N-1 && blowChk(r+1, r)){
-        //cout << priorDir << "\n";
         (priorDir == "L")? rightPush(r+1) : leftPush(r+1);
        downBlow(r+1, priorDir, cnt);
        return;
@@ -57,10 +54,8 @@ void downBlow(int r, string originDir, int cnt){
 void windBlow(int r, string originDir){
     int r1 = r;
     int r2 = r;
-    //cout << "====New Turn====\n";
     upBlow(r1);
-    //cout << "--------------\n";
-     downBlow(r2, originDir, 0); 
+    downBlow(r2, originDir, 0); 
 }
 
 int main() {
@@ -77,11 +72,8 @@ int main() {
         int row;
         cin >> row >> cmd;
         (cmd == "L")? leftPush(row) : rightPush(row);
-        // 5 5 5 2             // 5 5 5 2
-        // 5 4 0 2 // 2 5 4 0 // 2 5 4 0
-        // 1 1 4 3 // 1 1 4 3 // 1 4 3 1
-        originDir = priorDir; //R
-        windBlow(row, originDir); //1, R
+        originDir = priorDir; 
+        windBlow(row, originDir); 
     }
     for(int i = 1; i <= N; i++){
         for(int j = 1; j <= M; j++){
