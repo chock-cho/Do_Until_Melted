@@ -41,10 +41,9 @@ bool inGrid(int x, int y){
 }
 
 void copyArray(int dst[][104],int src[][104]){
-    for(int i = 1; i <= N+1; i++){
-        for(int j = 1; j <= M+1; j++){
-            if(src[i][j] != 0)
-                dst[i][j] = src[i][j];
+    for(int i = 1; i <= N; i++){
+        for(int j = 1; j <= M; j++){
+            dst[i][j] = src[i][j];
         }
     }
 }
