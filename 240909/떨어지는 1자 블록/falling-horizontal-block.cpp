@@ -16,8 +16,8 @@ void blockDrop(){
     int i;
     for(i = 2; i <= N; i++){
         bool flag = true;
-        for(int j = k; j <= m; j++){
-            if(j+k <= N && grid[i][j]==0) {
+        for(int j = 0; j < m; j++){
+            if(j+k <= N && grid[i][k+j]==0) {
                 continue;
             }
             else {
@@ -45,8 +45,8 @@ int main() {
             cin >> grid[i][j];
         }
     }
-    for(int i = k; i <= m; i++){
-        grid[1][i] = 1;
+    for(int i = 0; i < m; i++){
+        grid[1][k+i] = 1;
     }
     blockDrop();
     return 0;
