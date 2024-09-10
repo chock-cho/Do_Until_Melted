@@ -11,7 +11,6 @@ int cnt = 0;
 bool havetoBomb(int bomb_size){
     int cnt = 1; bool flag= false;
     vector<int> idx;
-    if(bomb_size == 1) return false;
     for(int i = 2; i <= bomb_size; i++){
         if(bomb[i-1]==bomb[i]) {
             flag = true;
@@ -46,6 +45,9 @@ int main() {
         cin >> bomb[i];
     }
     while(true){
+        if(bomb_size == 1 && M == 1) {
+            cout << "0"; return 0;
+        }
         bool flag = havetoBomb(bomb_size);
         if(!flag) break;
         int tmp_row =0;
