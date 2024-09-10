@@ -10,31 +10,25 @@ int cnt = 0;
 
 bool havetoBomb(int bomb_size){
     int cnt = 1; bool flag= false;
-    vector<int> idx;
+    int st_idx, en_idx;
     for(int i = 2; i <= bomb_size; i++){
         if(bomb[i-1]==bomb[i]) {
-            flag = true;
             cnt++; 
-            idx.push_back(i-1); 
-            idx.push_back(i); 
+            if(cnt==2) st_idx= i-1;
+            en_idx=i;
+            flag = true;
         }
         else {
             if(cnt >= M){
-                for(int j = 0; j < idx.size(); j++){
-                    bomb[idx[j]] = BLANK;
-                }
+                for(int i = st_idx; i <= en_idx; i++) bomb[i] = BLANK;
                 cnt=1;
             }
             cnt = 1;
         }
     }
     if(cnt >= M){
-        idx.erase(unique(idx.begin(), idx.end()), idx.end());
-        for(int j = 0; j < idx.size(); j++){
-            bomb[idx[j]] = BLANK;
-        } 
+         for(int i = st_idx; i <= en_idx; i++) bomb[i] = BLANK;
     }
-    idx.clear();
     return flag;
 }
 
@@ -68,8 +62,7 @@ int main() {
         }        
     }
     cout << bomb_size << "\n";
-    for(int i = 1; i <= bomb_size; i++){
+    for(int i = 1; i <= bomb_size; i++)
         cout << bomb[i] << "\n";
-    }
     return 0;
 }
