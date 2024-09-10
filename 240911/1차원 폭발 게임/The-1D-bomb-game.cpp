@@ -55,9 +55,10 @@ int main() {
     }
 
     while(true){
-        if(bomb_size == 1 && M == 1) {
+        if(M == 1) {
             cout << "0"; return 0;
         }
+        
         bool flag = havetoBomb(bomb_size);
         if(!flag) break;
         
