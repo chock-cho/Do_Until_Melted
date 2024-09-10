@@ -55,8 +55,12 @@ int main() {
     }
 
     while(true){
+        if(bomb_size == 1 && M == 1) {
+            cout << "0"; return 0;
+        }
         bool flag = havetoBomb(bomb_size);
         if(!flag) break;
+        
         int tmp_row =0;
         for(int i = 1; i <= bomb_size; i++){
             if(bomb[i] != BLANK) {
