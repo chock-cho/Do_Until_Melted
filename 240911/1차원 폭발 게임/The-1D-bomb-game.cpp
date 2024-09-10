@@ -6,6 +6,7 @@ using namespace std;
 int bomb_size, M;
 int bomb[101];
 int tmp[101];
+int count_arr[101]={0};
 int cnt = 0;
 
 bool havetoBomb(int bomb_size){
@@ -32,15 +33,28 @@ bool havetoBomb(int bomb_size){
     return flag;
 }
 
+void print(){
+    cout << bomb_size << "\n";
+    for(int i = 1; i <= bomb_size; i++)
+        cout << bomb[i] << "\n";
+}
+
 int main() {
     cin >> bomb_size >> M;
     for(int i = 1; i <= bomb_size; i++){
         cin >> bomb[i];
+        count_arr[bomb[i]]++;
     }
-    while(true){
-        if(bomb_size == 1 && M == 1) {
-            cout << "0"; return 0;
+    if(bomb_size == M) {
+        if(count_arr[bomb[bomb_size]]<M) {
+            print(); return 0; 
         }
+    }
+    if(bomb_size < M) {
+        print(); return 0;
+    }
+
+    while(true){
         bool flag = havetoBomb(bomb_size);
         if(!flag) break;
         int tmp_row =0;
@@ -61,8 +75,6 @@ int main() {
             tmp[i] = BLANK;
         }        
     }
-    cout << bomb_size << "\n";
-    for(int i = 1; i <= bomb_size; i++)
-        cout << bomb[i] << "\n";
+    print();
     return 0;
 }
