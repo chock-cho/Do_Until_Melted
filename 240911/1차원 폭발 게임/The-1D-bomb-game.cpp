@@ -20,7 +20,6 @@ bool havetoBomb(int bomb_size){
         }
         else {
             if(cnt >= M){
-                idx.erase(unique(idx.begin(), idx.end()), idx.end());
                 for(int j = 0; j < idx.size(); j++){
                     bomb[idx[j]] = BLANK;
                 }
