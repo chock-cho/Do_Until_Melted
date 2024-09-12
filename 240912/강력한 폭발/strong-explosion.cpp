@@ -67,7 +67,7 @@ void bomb3_rollback(int x, int y){
 }
 
 void sol(int cur){
-    if(cur == bombLoc.size()){
+    if(cur == bombLoc.size()+1){
         int cur_cnt = 0;
         for(int i = 1; i <= n; i++){
             for(int j = 1; j <= n; j++){
@@ -78,9 +78,8 @@ void sol(int cur){
         return;
     }
 
-    for(int i = 0; i < bombLoc.size(); i++){
-        int cur_x = bombLoc[i].first;
-        int cur_y = bombLoc[i].second;
+        int cur_x = bombLoc[cur].first;
+        int cur_y = bombLoc[cur].second;
 
         for(int type = 1; type <= 3; type++){
             if(type == 1){
@@ -99,7 +98,6 @@ void sol(int cur){
                 bomb3_rollback(cur_x,cur_y);
             }
         }
-    }
 
 }
 
