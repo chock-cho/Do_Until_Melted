@@ -67,7 +67,7 @@ void bomb3_rollback(int x, int y){
 }
 
 void sol(int cur){
-    if(cur == bombLoc.size()+1){
+    if(cur == bombLoc.size()){
         int cur_cnt = 0;
         for(int i = 1; i <= n; i++){
             for(int j = 1; j <= n; j++){
