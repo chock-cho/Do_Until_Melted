@@ -3,7 +3,6 @@
 #include <vector>
 using namespace std;
 int N, M;
-int answer = -987654321;
 int ans = 0;
 
 int dfs(int cur, vector<vector<int>> &adj, vector<bool> &vis){
@@ -15,6 +14,7 @@ int dfs(int cur, vector<vector<int>> &adj, vector<bool> &vis){
     }
     return ans;
 }
+
 int main() {
     cin >> N >> M;
     vector<vector<int>> adj(N+1, vector<int>(0));
@@ -24,7 +24,7 @@ int main() {
         cin >> x >> y;
         adj[x].push_back(y); adj[y].push_back(x);
     }
-    answer = max(answer, dfs(1, adj, vis));
-    cout << answer-1;
+    vis[1]=true;
+    cout << dfs(1, adj, vis);
     return 0;
 }
