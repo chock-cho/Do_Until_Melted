@@ -1,51 +1,57 @@
 #include <iostream>
 #include <queue>
 using namespace std;
-const int dx[]={-1, 1, 0, 0}; //상하좌우
+const int dx[]={-1, 1, 0, 0};
 const int dy[]={0, 0, -1, 1};
-int grid[101][101];
-int nxt_grid[101][101];
 int n, m, t;
-queue<pair<int,int>> cq, nq;
+int grid[101][101];
+int mark[101][101];
+queue<pair<int,int>> q;
+int answer = 0;
+
+void mark_init(){
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= n; j++){
+            mark[i][j] = 0;
+        }
+    }
+}
 
 bool inGrid(int x, int y){
     return (x>=1)&&(x<=n)&&(y>=1)&&(y<=n);
 }
 
-void init_nxt(){
+void count_marble(){
+    answer = 0;
     for(int i = 1; i <= n; i++){
         for(int j = 1; j <= n; j++){
-            nxt_grid[i][j]=0;
-        }
-    }
-}
-
-void decide_cq(){
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= n; j++){
-            if(nxt_grid[i][j]==1) cq.push({i,j});
+            if(mark[i][j]==1) {
+                answer++;
+                q.push(make_pair(i,j));
+            } 
         }
     }
 }
 
 void simul(){
-    init_nxt();
-    while(!cq.empty()){
-        int x= cq.front().first; 
-        int y= cq.front().second;
-        cq.pop();
-        int nx, ny=0;
-        int nxt_val=-987654321;
-        for(int k = 0; k < 4; k++){
-            if(!inGrid(x+dx[k], y+dy[k])) continue;
-            if(grid[x+dx[k]][y+dy[k]] < nxt_val) continue;
-            nx = x+dx[k]; ny = y+dy[k];
+    mark_init();
+    while(!q.empty()){
+        int x = q.front().first;
+        int y = q.front().second;
+        q.pop();
+        int nx, ny = 0;
+        int max_ans=-987654321;
+        for(int i = 0; i < 4; i++){
+            if(!inGrid(x+dx[i], y+dy[i])) continue;
+            if(max_ans < grid[x+dx[i]][y+dy[i]]){
+                nx = x+dx[i];
+                ny = y+dy[i];
+                max_ans = grid[x+dx[i]][y+dy[i]];
+            }
         }
-       // cout << nx << ", " << ny <<"\n";
-        nxt_grid[nx][ny]+=1;
+        mark[nx][ny]+=1;
     }
-    cout << "\n";
-   //return nq.size();
+    count_marble();
 }
 
 int main() {
@@ -58,16 +64,11 @@ int main() {
     while(m--){
         int r, c;
         cin >> r >> c;
-        nxt_grid[r][c]=1;
+        q.push({r,c});
     }
-    queue<pair<int,int>> q;
-    for(int i = 0; i < t; i++){
-        decide_cq();
+    while(t--){
         simul();
-        cq = nq;
-        nq = q;
     }
-    decide_cq();
-    cout << cq.size();
+    cout << answer << "\n";
     return 0;
 }
