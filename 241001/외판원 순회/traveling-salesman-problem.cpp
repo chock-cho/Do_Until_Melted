@@ -17,11 +17,12 @@ int calc(vector<int> &v){
         ans+=cost[prev][v[i]];
         prev = v[i];
     }
+    if(cost[prev][1]==0) return -1;
     ans+= cost[prev][1];
     return ans;
 }
 
-void permutation(int cnt){
+void permutation(int cnt, int prev){
     if(cnt == n){
         if(calc(v)!= -1){
             answer = min(answer, calc(v));
@@ -32,7 +33,7 @@ void permutation(int cnt){
         if(!vis[i]){
             vis[i]=true;
             v.push_back(i);
-            permutation(cnt+1);
+            permutation(cnt+1, i);
             vis[i]=false;
             v.pop_back();
         } 
@@ -47,7 +48,7 @@ int main() {
         }
     }
     vis[1]=true;
-    permutation(1);
+    permutation(1, 1);
     cout << answer;
     return 0;
 }
