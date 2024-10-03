@@ -28,12 +28,6 @@ int main() {
             psum[x][y]=grid[x][y]+psum[x-1][y]+psum[x][y-1]-psum[x-1][y-1];
         }
     }
-    for(int i = 1; i <=n; i++){
-        for(int j = 1; j <= n; j++){
-            cout << psum[i][j] << " ";
-        }
-        cout << "\n";
-    }
     for(int x= 0; x <= n; x++){
         for(int y= 0; y <= n; y++){
             // st좌표: (x,y)
