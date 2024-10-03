@@ -31,8 +31,8 @@ int main() {
     for(int x= 0; x <= n; x++){
         for(int y= 0; y <= n; y++){
             // st좌표: (x,y)
-            for(int w = 0; w <=n-x; w++){
-                for(int h = 0; h <=n-y; h++){
+            for(int w = 1; w <=n-x; w++){
+                for(int h = 1; h <=n-y; h++){
                     if(!inGrid(x+w, y+h)) continue;
                     int cur = psum[x+w][y+h]-(psum[x+w][y]+psum[x][y+h])+psum[x][y];
                     if(ans < cur){
