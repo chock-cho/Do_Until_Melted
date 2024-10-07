@@ -18,8 +18,6 @@ int calcXor(){
 void dfs(int cnt, int prev_idx){
     if(cnt==m) {
         ans=max(ans,calcXor());
-        //for(int i = 0; i < v.size(); i++)cout<<v[i]<< " ";
-        //cout<<"\n";
         return;
     }
     for(int i = prev_idx+1; i < n; i++){
@@ -34,6 +32,7 @@ int main() {
     for(int i = 0; i < n; i++){
         int num; cin >> num; nums.push_back(num);
     }
+    sort(nums.begin(),nums.end());
     dfs(0,-1);
     cout << ans;
     return 0;
