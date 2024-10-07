@@ -15,29 +15,25 @@ int calcXor(){
     return sum;
 }
 
-void dfs(int cnt, int prev, vector<bool>&vis){
+void dfs(int cnt, int prev){
     if(cnt==m) {
         ans=max(ans,calcXor());
         return;
     }
     for(int i = 0; i < n; i++){
         if(prev >= nums[i]) continue;
-        if(vis[nums[i]]) continue;
-        vis[nums[i]]=true;
         v.push_back(nums[i]);
-        dfs(cnt+1, nums[i], vis);
-        vis[nums[i]]=false;
+        dfs(cnt+1, nums[i]);
         v.pop_back();
     }
 }
 
 int main() {
     cin >> n >> m;
-    for(int i = 1; i <= n; i++){
+    for(int i = 0; i < n; i++){
         int num; cin >> num; nums.push_back(num);
     }
-    vector<bool> vis(n+1, false);
-    dfs(0,-1,vis);
+    dfs(0,-1);
     cout << ans;
     return 0;
 }
