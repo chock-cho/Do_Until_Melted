@@ -15,15 +15,16 @@ int calcXor(){
     return sum;
 }
 
-void dfs(int cnt, int prev){
+void dfs(int cnt, int prev_idx){
     if(cnt==m) {
         ans=max(ans,calcXor());
+        //for(int i = 0; i < v.size(); i++)cout<<v[i]<< " ";
+        cout<<"\n";
         return;
     }
-    for(int i = 0; i < n; i++){
-        if(prev >= nums[i]) continue;
+    for(int i = prev_idx+1; i < n; i++){
         v.push_back(nums[i]);
-        dfs(cnt+1, nums[i]);
+        dfs(cnt+1, i);
         v.pop_back();
     }
 }
