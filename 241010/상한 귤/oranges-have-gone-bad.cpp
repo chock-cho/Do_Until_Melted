@@ -25,15 +25,11 @@ int main() {
     }
     while(!q.empty()){
         int x=q.front().first; int y= q.front().second;
-        //cout << "queue: (" << x << ", " << y << ")\n";
         q.pop();
         for(int i = 0; i < 4; i++){
             int nx=x+dx[i]; int ny=y+dy[i];
-            //cout << "nx,ny : " << nx << " , " << ny << "\n";
             if(!inGrid(nx, ny)) continue;
-            //cout << "nx,ny : " << nx << " , " << ny << "\n";
             if(vis[nx][ny]!=-1) continue;
-            //cout << "nx,ny : " << nx << " , " << ny << "\n";
             if(grid[nx][ny]!=1) continue;
             vis[nx][ny]=vis[x][y]+1;
             q.push(make_pair(nx,ny));
