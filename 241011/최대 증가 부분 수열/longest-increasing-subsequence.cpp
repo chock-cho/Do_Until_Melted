@@ -1,27 +1,20 @@
 #include <iostream>
 using namespace std;
-int n;
-int arr[1001];
-int dp[1001];
-
-void dp_init(){
-    for(int i = 1; i <= n; i++){
-        dp[i]=-987654321;
-    }
-}
-
+int N; int arr[1001]; int dp[1001]={1};
+int cur_max=-987654321;
 int main() {
-   //dp = i번째에서 가장 
-   cin >> n;
-   for(int i = 1; i <= n; i++){
-        cin >> arr[i];
-   }
-   dp_init();
-   dp[1]=1;
-   for(int i = 2; i <= n; i++){
-        if(arr[i-1]<arr[i]) dp[i]=dp[i-1]+1;
-        else dp[i]=dp[i-1];
-   }
-   cout << dp[n];
+    cin >> N;
+    for(int i =1; i <= N; i++){
+        cin >>arr[i];
+    }
+    dp[0]=0;
+    for(int i = 1; i <= N; i++){
+        dp[i]=1;
+        for(int j = 0; j<= N; j++) {
+            if(arr[j]<arr[i] && dp[j]+1 >dp[i]) dp[i]=dp[j]+1;
+        }
+        if(dp[i] > cur_max) cur_max=dp[i];
+    }
+    cout << cur_max;
     return 0;
 }
