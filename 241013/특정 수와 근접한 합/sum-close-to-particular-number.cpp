@@ -13,7 +13,7 @@ void dfs(int cnt, int prev_idx){
         cur_sum= sum-arr[v[0]]-arr[v[1]];
         ans=min(abs(cur_sum-S), ans);
     }
-    for(int i = prev_idx+1; i <= N; i++){
+    for(int i = prev_idx+1; i < N; i++){
         v.push_back(i);
         dfs(cnt+1,i);
         v.pop_back();
