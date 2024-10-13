@@ -8,10 +8,11 @@ int n,m;
 int main() {
     cin>> n >> m;
     for(int i = 1; i <= n; i++){
-        cin >> arr[i];
-        pq.push(arr[i]);
-
-        int t = pq.top(); pq.pop();
+       cin >> arr[i];
+       pq.push(arr[i]);
+    }
+    for(int i = 1; i <= m; i++){
+        int t= pq.top(); pq.pop();
         pq.push(t-1);
     }
     cout << pq.top();
