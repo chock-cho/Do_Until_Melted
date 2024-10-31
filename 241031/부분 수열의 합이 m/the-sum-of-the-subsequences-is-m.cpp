@@ -15,7 +15,7 @@ int sol(){
     dp[0]=0;
     for(int i = 0; i <= n; i++){
         for(int j = m; j >= 1; j--){
-            if(i >= A[j]) {
+            if(j >= A[i]) {
                 dp[j]=min(dp[j], dp[j-A[i]]+1);
             }
         }
