@@ -6,24 +6,18 @@ int n;
 int num[]={1,2,5};
 int dp[MAX_INT];
 //dp[i]= 합이 i일때, 나타낼 수 있는 경우의 수
-// top-down방식 for(j=n to 1) for(i=0 to 3) dp[j]=dp[j-num[i]]+1
-void init_dp(){
-    for(int i = 0; i < n; i++) dp[i]=0;
-}
-
-int sol(){
-    dp[0]=1;
-    for(int j = 1; j <= n; j++){
-        for(int i = 0; i < 3; i++){
-            if(j >= num[i]) dp[j]+=dp[j-num[i]];
-        }
-    }
+// top-down+재귀 풀이
+int sol(int n){
+    if(dp[n]!=0) return dp[n]%DIV_INT;
+    dp[n]+= sol(n-1);
+    dp[n]+= sol(n-2);
+    dp[n]+= sol(n-5);
     return dp[n]%DIV_INT;
 }
 
 int main() {
+    dp[1]=1; dp[2]=2; dp[3]=3; dp[4]=5; dp[5]=9;
     cin >> n;
-    init_dp();
-    cout << sol();
+    cout << sol(n);
     return 0;
 }
