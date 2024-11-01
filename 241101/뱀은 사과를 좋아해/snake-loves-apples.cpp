@@ -3,9 +3,12 @@
 #include <queue>
 using namespace std;
 #define INT_MAX 101
+#define HEAD 1
+#define BODY 2
+#define TAIL 3
 int grid[INT_MAX][INT_MAX];
-bool vis[INT_MAX][INT_MAX];
-int apples[INT_MAX][INT_MAX]={0};
+int vis[INT_MAX][INT_MAX];
+bool apples[INT_MAX][INT_MAX];
 int N, M, K;
 const int dx[]={-1, 1, 0, 0}; // UDRL
 const int dy[]={0, 0, 1, -1};
@@ -28,7 +31,7 @@ int main() {
     while(M--){
         int x, y;
         cin >> x >> y;
-        apples[x][y]=1;
+        apples[x][y]=true;
     }
     queue<pair<char,int>> moves;
     for(int i = 0; i < K; i++){
@@ -36,33 +39,34 @@ int main() {
         cin >> d >> p;
         moves.push({d,p});
     }
-    int cur_x=1; int cur_y=1;
+    int head_x=1; int head_y=1;
     vector<pair<int,int>> snake;
     bool flag =true;
-    snake.push_back({1,1});
-    vis[1][1]=true;
+    snake.push_back({head_x,head_y});
+    vis[head_x][head_y]=HEAD;
     while(flag && !moves.empty()){
         char cur_d=moves.front().first; int cur_p=moves.front().second;
         moves.pop();
         int n_dir= chooseNxtDir(cur_d); 
         for(int i = 0; i < cur_p; i++){
             T+=1;
-            int nx=cur_x+dx[n_dir]; int ny=cur_y+dy[n_dir];
-            if(!inGrid(nx,ny) || vis[nx][ny]) {
-                flag=false; 
-                break;
+            int nx=head_x+dx[n_dir]; int ny=head_y+dy[n_dir];
+            if(!inGrid(nx,ny) || vis[nx][ny]==BODY) {
+                flag=false; break;
             }
-            vis[nx][ny]=true;
-            snake.push_back({nx,ny}); // snake 벡터의 맨 뒤에 있는 친구가 snake의 head가 된다.
-            if(apples[nx][ny]!=1) {
-                snake.erase(snake.begin()); // snake의 tail은 snake의 처음
-                int r= snake.front().first; int c=snake.front().second;
-                vis[r][c]=false;
+            vis[nx][ny]=HEAD; vis[head_x][head_y]=BODY;
+            snake.push_back({nx,ny}); 
+            if(!apples[nx][ny]) {
+                int tail_x= snake[0].first; int tail_y=snake[0].second;
+                snake.erase(snake.begin());
+                vis[tail_x][tail_y]=0;
             }
-            cur_x=snake.back().first; cur_y=snake.back().second;
+            else apples[nx][ny]=false;
+            vis[snake[0].first][snake[0].second]=TAIL; 
+            head_x=snake.back().first;
+            head_y=snake.back().second;
         }
     }
-
     cout << T;
     return 0;
 }
