@@ -25,6 +25,7 @@ void dfs(int depth, int x, int y){
     }
     return;
 }
+
 int main() {
     cin >> n;
     for(int i = 0; i < n; i++){
@@ -32,7 +33,6 @@ int main() {
             cin >> grid[i][j];
         }
     }
-    bool flag;
     for(int i = 0; i < n; i++){
         for(int j = 0; j < n; j++){
             int cur_block=0;
