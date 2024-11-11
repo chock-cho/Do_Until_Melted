@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 typedef long long ll;
-#define MAX_S 2e+1
+#define MAX_S 2e9+1
 ll s;
 ll ans =0;
 
