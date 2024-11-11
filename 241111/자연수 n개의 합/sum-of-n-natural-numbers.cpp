@@ -1,13 +1,14 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
+typedef long long ll;
 #define MAX_S 2e+1
-int s;
-int ans =0;
+ll s;
+ll ans =0;
 
 int main(){
     cin >> s;
-    int lo = 1; int hi = MAX_S; int mid;
+    ll lo = 1; ll hi = MAX_S; ll mid;
     while(lo <= hi){
         mid = (lo+hi)/2;
         if(mid*(mid+1)/2 > s){
