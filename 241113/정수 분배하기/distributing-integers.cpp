@@ -2,17 +2,19 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-int n,m;
-vector<int> nums;
-int answer = 0;
+#define MAX_NUM 100000
+typedef long long ll;
+ll n,m;
+vector<ll> nums;
+ll answer = 0;
 
-bool isPossible(int mid){
-    int sum=0;
+bool isPossible(ll mid){
+    ll sum=0;
     for(int i = 0; i < nums.size(); i++){
         sum += nums[i]/mid;
+        if(sum >= m) return true;
     }
-    if(sum >= m) return true;
-    else return false;
+    return false;
 }
 
 int main() {
@@ -21,7 +23,7 @@ int main() {
         int num; cin >> num;
         nums.push_back(num);
     }
-    int lo = 1; int hi = *min_element(nums.begin(), nums.end()); int mid;
+    ll lo = 1; ll hi = MAX_NUM; ll mid;
     while(lo <= hi){
         mid = (lo+hi)/2;
         if(isPossible(mid)) {
