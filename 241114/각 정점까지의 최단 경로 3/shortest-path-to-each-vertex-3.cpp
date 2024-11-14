@@ -41,7 +41,9 @@ int main() {
         }
     }
 
-    for(int i = 2; i <= n; i++)
+    for(int i = 2; i <= n; i++){
+        if(dist[i] == 1e9) dist[i]=-1;
         cout << dist[i] << endl;
+    }
     return 0;
 }
