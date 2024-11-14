@@ -5,15 +5,15 @@ using namespace std;
 typedef long long ll;
 int n;
 #define MAX_NUM 1e9+1
-vector<pair<int,int>> segs;
+vector<pair<ll,ll>> segs;
 ll ans=0;
 
 bool isPossbile(ll mid){
-    int cur_x=segs[0].first;
+    ll cur_x=segs[0].first;
     for(int i = 0; i < segs.size()-1; i++){
         if(cur_x + mid > segs[i+1].second)
             return false;
-        cur_x= cur_x+mid;
+        cur_x= max(cur_x+mid, segs[i+1].first);
     }
     return true;
 }
@@ -21,7 +21,7 @@ bool isPossbile(ll mid){
 int main() {
     cin >> n;
     for(int i = 0; i < n; i++){
-        int s,e; cin >> s >> e;
+        ll s,e; cin >> s >> e;
         segs.push_back(make_pair(s,e));
     }
     sort(segs.begin(), segs.end());
