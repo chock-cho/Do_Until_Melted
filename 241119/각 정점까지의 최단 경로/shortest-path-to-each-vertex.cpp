@@ -38,7 +38,7 @@ int main() {
         }
     }
     for(int i = 1; i <= n; i++){
-        if(dist[k]!= 1e9) cout << dist[i] << endl;
+        if(dist[i]!= 1e9) cout << dist[i] << endl;
         else cout << -1 << endl;
     }
     return 0;
